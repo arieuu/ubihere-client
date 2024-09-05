@@ -1,7 +1,7 @@
 
 function ProjectCard() {
     return(
-        <a href="" className="hover:underli">
+        <a href="" className="">
         <div className="bg-[url('/aveiro.png')] bg-cover rounded-lg px-4 py-1
             relative 
             z-10
