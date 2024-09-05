@@ -1,8 +1,8 @@
-// bg-[url('public/aveiro.png')]
 
 function ProjectCard() {
     return(
-        <div className="bg-[url('public/aveiro.png')]  bg-cover min-h-[190px] rounded-lg px-4 py-1
+        <a href="" className="hover:underli">
+        <div className="bg-[url('/aveiro.png')] bg-cover rounded-lg px-4 py-1
             relative 
             z-10
             before:rounded-lg
@@ -14,14 +14,23 @@ function ProjectCard() {
             before:bg-YellowUbihere-0
             before:opacity-65
             before:z-[-5]
-            flex flex-col"> 
+            flex flex-col
+            
+            min-h-[220px]
 
-            <h1 className="text-4xl font-Odor text-white justify-self-center my-auto ml- pt-8"> Smart lamp </h1>
+            md:min-w-[180px]
 
-            <div className="flex justify-between font-Lexend text-white">
+            lg:min-w-[260px]
+            lg:min-h-[160px]
+            "> 
+
+            <h1 className="text-4xl font-Odor text-white justify-self-center my-auto ml- pt-8 hover:underline"> Smart lamp </h1>
+
+            <div className="flex justify-between font-Lexend text-white text-sm">
                 <span>Starts</span> <span>210 people rated</span>
             </div>
         </div>
+        </a>
     )
 }
 
