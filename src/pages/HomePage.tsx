@@ -1,5 +1,7 @@
 import logo from "/ubiherelogo.svg";
 import ProjectCard from "../components/ProjectCard";
+import { Link } from "react-router-dom";
+import NavigationLinks from "../components/NavigationLinks";
 
 function HomePage() {
     return(
@@ -11,11 +13,7 @@ function HomePage() {
                     <img src={logo} alt="" className="w-[44px] h-[46px]"/>
                 </div>
 
-                <span className="mx-auto text-[17px] mb-14"> 
-                    <a className="hover:underline" href="#"> Sign Up </a> 
-                    | <a className="hover:underline" href="#"> Login </a>
-                    | <a className="hover:underline" href="#"> Projects </a>
-                </span>
+                <NavigationLinks />
 
                 <div className="grid px-5 gap-6 grid-cols-1
                                 sm:grid-cols-2

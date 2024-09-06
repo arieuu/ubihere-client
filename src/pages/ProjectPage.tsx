@@ -1,6 +1,7 @@
 import logo from "/ubiherelogo.svg";
 import aveirobig from "/aveirobig.svg";
 import ProjectComment from "../components/ProjectComment";
+import NavigationLinks from "../components/NavigationLinks";
 
 
 function ProjectPage() {
@@ -14,12 +15,9 @@ function ProjectPage() {
                     <img src={logo} alt="" className="w-[44px] h-[46px]"/>
                 </div>
 
-                <span className="mx-aut text-[17px] mb-8"> 
-                    <a className="hover:underline" href="#"> Sign Up </a> 
-                    | <a className="hover:underline" href="#"> Login </a>
-                    | <a className="hover:underline" href="#"> Projects </a>
+                <span className="mx-aut text-[17px] mb-8">
+                    <NavigationLinks />
                 </span>
-
 
                 <h2 className="font-Odor text-5xl mb-5"> Smart lamp </h2>
 

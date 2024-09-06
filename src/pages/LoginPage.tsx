@@ -1,5 +1,6 @@
 import logo from "/ubiherelogo.svg";
 import arrow from "/arrow.svg";
+import NavigationLinks from "../components/NavigationLinks";
 
 
 function LoginPage() {
@@ -11,18 +12,14 @@ function LoginPage() {
                 <img src={logo} alt="" className="w-[44px] h-[46px]"/>
             </div>
 
-            <span className="mx-auto text-[17px] mb-14"> 
-                <a className="hover:underline" href="#"> Sign Up </a> 
-                | <a className="hover:underline" href="#"> Login </a>
-                | <a className="hover:underline" href="#"> Projects </a>
-            </span>
+            <NavigationLinks /> 
 
             <form action="" className="flex flex-col">
                 <input className="mx-auto bg-LightgrayUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" type="text" placeholder="Insira o seu email" />
                 <input className="mx-auto bg-LightgrayUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" type="password" placeholder="Crie uma palavra passe" />
 
 
-                <button type="submit" className="mx-auto flex justify-between bg-YellowUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" >  
+                <button type="submit" className="mx-auto hover:bg-[#CFB619] flex justify-between bg-YellowUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" >  
                     Entrar
                     <img className="w-6" src={arrow} alt="" />
                 </button> 
