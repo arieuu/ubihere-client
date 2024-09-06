@@ -12,6 +12,7 @@ function CreateProjectPage() {
                     <img src={logo} alt="" className="w-[44px] h-[46px]"/>
                 </div>
 
+
                 <span className="mx-aut text-[17px] mb-8">
                     <NavigationLinks />
                 </span>

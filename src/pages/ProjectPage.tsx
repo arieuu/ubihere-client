@@ -2,6 +2,7 @@ import logo from "/ubiherelogo.svg";
 import aveirobig from "/aveirobig.svg";
 import ProjectComment from "../components/ProjectComment";
 import NavigationLinks from "../components/NavigationLinks";
+import StarRating from "../components/StarRating";
 
 
 function ProjectPage() {
@@ -21,7 +22,7 @@ function ProjectPage() {
 
                 <h2 className="font-Odor text-5xl mb-5"> Smart lamp </h2>
 
-                <span className="font-Lexend"> 5 Start </span>
+                <StarRating color="black" />
                 <span className="font-Lexend text-sm mb-7"> 203 people rated </span>
 
                 <img src={aveirobig} className="mb-10" alt="" />

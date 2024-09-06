@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
+import StarRating from "./StarRating";
 
 function ProjectCard() {
     return(
-        <Link to={"/projectpage"} className="">
             <div className="bg-[url('/aveiro.png')] bg-cover rounded-lg px-4 py-1
                 relative 
                 z-10
@@ -25,13 +25,13 @@ function ProjectCard() {
                 lg:min-h-[160px]
                 "> 
 
-                <h1 className="text-4xl font-Odor text-white justify-self-center my-auto ml- pt-8 hover:underline"> Smart lamp </h1>
+                <Link to={"/projectpage"} className="text-4xl font-Odor text-white justify-self-center my-auto ml- pt-8 hover:underline"><h1 className=""> Smart lamp </h1></Link>
 
                 <div className="flex justify-between font-Lexend text-white text-sm">
-                    <span>Starts</span> <span>210 people rated</span>
+                    
+                    <StarRating color="white"/> <span>210 people rated</span>
                 </div>
             </div>
-        </Link>
     )
 }
 

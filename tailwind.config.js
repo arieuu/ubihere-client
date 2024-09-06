@@ -4,6 +4,11 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+
+  daisyui: {
+    themes: ["light"]
+  },
+
   theme: {
     extend: {
       fontFamily: { // we name our custom font "tiempos"
@@ -18,6 +23,8 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require("daisyui"),
+  ],
 }
 
