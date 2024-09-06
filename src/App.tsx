@@ -1,8 +1,9 @@
 // import HomePage from "./pages/HomePage"
 // import SignupPage from "./pages/SignupPage"
 // import LoginPage from "./pages/LoginPage"
+// import CreateProjectPage from "./pages/CreateProjectPage"
 
-import CreateProjectPage from "./pages/CreateProjectPage"
+import ProjectPage from "./pages/ProjectPage"
 
 function App() {
 
@@ -11,7 +12,8 @@ function App() {
       { /*<HomePage /> */}
       { /* <SignupPage /> */}
       {/* <LoginPage /> */ }
-      <CreateProjectPage />
+      { /* <CreateProjectPage /> */}
+      <ProjectPage />
     </>  
   )
 }
