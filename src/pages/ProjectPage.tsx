@@ -1,5 +1,6 @@
 import logo from "/ubiherelogo.svg";
 import aveirobig from "/aveirobig.svg";
+import ProjectComment from "../components/ProjectComment";
 
 
 function ProjectPage() {
@@ -33,20 +34,10 @@ function ProjectPage() {
 
                 <input className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
 
-                <p className="text-xl mb-8">
-                    <p className="font-Odor mb-2"> Ariel Carvalho </p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi sint mollitia provident deleniti quod quia optio pariatur obcaecati magni rem?
-                </p>
-
-                <p className="text-xl mb-8">
-                    <p className="font-Odor mb-2"> John Doe </p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi sint mollitia provident deleniti quod quia optio pariatur obcaecati magni rem?
-                </p>
-
-                <p className="text-xl">
-                    <p className="font-Odor mb-2"> Marie </p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi sint mollitia provident deleniti quod quia optio pariatur obcaecati magni rem?
-                </p>
+                <ProjectComment />
+                <ProjectComment />
+                <ProjectComment />
+                <ProjectComment />
 
                 <div className="mt-9 text-[17px] flex justify-center text-DarkgrayUbihere-0 px-6 text-center"> 
                     Ubiwhere 2007-2024. All rights reserved. 
