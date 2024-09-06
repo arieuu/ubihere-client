@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
 import './index.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -9,6 +8,7 @@ import LoginPage from './pages/LoginPage.tsx'
 import SignupPage from './pages/SignupPage.tsx'
 import ProjectPage from './pages/ProjectPage.tsx'
 import CreateProjectPage from './pages/CreateProjectPage.tsx'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 const router = createBrowserRouter([
   {
@@ -33,9 +33,13 @@ const router = createBrowserRouter([
   }
 ])
 
+const queryClient = new QueryClient;
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {/* <App /> */}
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      {/* <App /> */}
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>,
 )

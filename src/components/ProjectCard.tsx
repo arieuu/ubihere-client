@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import StarRating from "./StarRating";
+import { IProject } from "../types/main";
 
-function ProjectCard() {
+interface Props {
+    project: IProject
+    
+}
+
+function ProjectCard({ project }:Props) {
+    const img = "bg-[url('" + project.image + "')]"
+    
+    console.log(img)
     return(
-            <div className="bg-[url('/aveiro.png')] bg-cover rounded-lg px-4 py-1
+            <div  className="card bg-cover rounded-lg px-4 py-1
                 relative 
                 z-10
                 before:rounded-lg
@@ -23,13 +32,15 @@ function ProjectCard() {
 
                 lg:min-w-[260px]
                 lg:min-h-[160px]
-                "> 
-
-                <Link to={"/projectpage"} className="text-4xl font-Odor text-white justify-self-center my-auto ml- pt-8 hover:underline"><h1 className=""> Smart lamp </h1></Link>
+                "
+                style={{backgroundImage: `url(${project.image})`}}  // Adding bg image from api
+                > 
+                
+                <Link to={"/projectpage"} className="text-4xl font-Odor text-white justify-self-center my-auto ml- pt-8 hover:underline"><h1 className=""> {project.title} </h1></Link>
 
                 <div className="flex justify-between font-Lexend text-white text-sm">
                     
-                    <StarRating color="white"/> <span>210 people rated</span>
+                    <StarRating color="white"/> <span> {project.number_of_responses} people rated</span>
                 </div>
             </div>
     )

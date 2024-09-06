@@ -1,9 +1,13 @@
 import logo from "/ubiherelogo.svg";
 import ProjectCard from "../components/ProjectCard";
-import { Link } from "react-router-dom";
 import NavigationLinks from "../components/NavigationLinks";
+import useGetProjects from "../hooks/useGetProjects";
+import { IProject } from "../types/main";
 
 function HomePage() {
+
+    const { isLoading, data, isError } = useGetProjects()
+
     return(
         <>
             <div className="flex flex-col justify-center align-middle pt-28 pb-8 border-black border- border-solid ">
@@ -18,12 +22,10 @@ function HomePage() {
                 <div className="grid px-5 gap-6 grid-cols-1
                                 sm:grid-cols-2
                                 md:grid-cols-3 md:max-w-[900px] md:mx-auto md:px-0 md:gap-5">
-                    <ProjectCard />
-                    <ProjectCard />
-                    <ProjectCard />
-                    <ProjectCard />
-                    <ProjectCard />
-                    <ProjectCard />
+                    
+                    { data?.map((project: IProject) => {
+                        return <ProjectCard project={project}/>
+                    })}
                 </div>
 
                 <div className="mt-9 text-[17px] flex justify-center text-DarkgrayUbihere-0 px-6 text-center"> 
