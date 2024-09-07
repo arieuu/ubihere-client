@@ -6,8 +6,9 @@ import { IProject } from "../types/main";
 
 function HomePage() {
 
-    const { isLoading, data, isError } = useGetProjects()
-
+    const { isLoading, data: projects, isError } = useGetProjects()
+    
+    console.log(projects)
     return(
         <>
             <div className="flex flex-col justify-center align-middle pt-28 pb-8 border-black border- border-solid ">
@@ -23,9 +24,10 @@ function HomePage() {
                                 sm:grid-cols-2
                                 md:grid-cols-3 md:max-w-[900px] md:mx-auto md:px-0 md:gap-5">
                     
-                    { data?.map((project: IProject) => {
+                    { projects && projects.length ? projects?.map((project) => {
                         return <ProjectCard project={project}/>
-                    })}
+                    }) : "no data"}
+
                 </div>
 
                 <div className="mt-9 text-[17px] flex justify-center text-DarkgrayUbihere-0 px-6 text-center"> 

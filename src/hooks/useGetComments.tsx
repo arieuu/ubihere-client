@@ -1,13 +1,13 @@
 import { useQuery } from "react-query"
 import axiosInstance from "../services/axiosInstance"
-import { IProject } from "../types/main"
+import { IComment } from "../types/main"
 
-const useGetProjects = () => {
+const useGetComments = () => {
 
     const query = useQuery({
-        queryKey: ["projects"],
+        queryKey: ["comments"],
         queryFn: () => {
-            return axiosInstance.get<IProject[]>("/projects/")
+            return axiosInstance.get<IComment[]>(`/comments`)
             .then(res => res.data)
         }
     })
@@ -15,4 +15,4 @@ const useGetProjects = () => {
     return query;
 }
 
-export default useGetProjects;
+export default useGetComments;

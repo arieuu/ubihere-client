@@ -2,12 +2,12 @@ import { useQuery } from "react-query"
 import axiosInstance from "../services/axiosInstance"
 import { IProject } from "../types/main"
 
-const useGetProjects = () => {
+const useRetrieveProject = (projectId: string) => {
 
     const query = useQuery({
-        queryKey: ["projects"],
+        queryKey: ["project"],
         queryFn: () => {
-            return axiosInstance.get<IProject[]>("/projects/")
+            return axiosInstance.get<IProject>(`/projects/${projectId}`)
             .then(res => res.data)
         }
     })
@@ -15,4 +15,4 @@ const useGetProjects = () => {
     return query;
 }
 
-export default useGetProjects;
+export default useRetrieveProject;
