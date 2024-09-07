@@ -9,6 +9,7 @@ function HomePage() {
     const { isLoading, data: projects, isError } = useGetProjects()
     
     console.log(projects)
+    console.log("token:" + localStorage.getItem("loginToken"))
     return(
         <>
             <div className="flex flex-col justify-center align-middle pt-28 pb-8 border-black border- border-solid ">
@@ -18,8 +19,9 @@ function HomePage() {
                     <img src={logo} alt="" className="w-[44px] h-[46px]"/>
                 </div>
 
+                {localStorage.getItem("loginToken")}
+                
                 <NavigationLinks />
-
                 <div className="grid px-5 gap-6 grid-cols-1
                                 sm:grid-cols-2
                                 md:grid-cols-3 md:max-w-[900px] md:mx-auto md:px-0 md:gap-5">
