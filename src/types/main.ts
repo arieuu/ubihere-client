@@ -17,3 +17,9 @@ export interface IComment {
     content: string,
     project_id: number,
 }
+
+export interface ISignUp {
+    email: string,
+    password: string,
+    name: string
+}

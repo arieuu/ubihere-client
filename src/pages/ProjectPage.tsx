@@ -1,12 +1,10 @@
 import logo from "/ubiherelogo.svg";
-import aveirobig from "/aveirobig.svg";
 import ProjectComment from "../components/ProjectComment";
 import NavigationLinks from "../components/NavigationLinks";
 import StarRating from "../components/StarRating";
 import { useParams } from "react-router-dom";
 import useRetrieveProject from "../hooks/useRetrieveProject";
 import useGetComments from "../hooks/useGetComments";
-
 
 function ProjectPage() {
 
