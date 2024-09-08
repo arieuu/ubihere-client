@@ -1,18 +1,21 @@
 import { useMutation } from "react-query"
 import { redirect, useNavigate } from "react-router-dom";
 import axiosInstance from "../services/axiosInstance";
-import { ILogin, ISignUp } from "../types/main";
+import { IProject, ISignUp } from "../types/main";
 
-const useLogin = () => {
+const useCreateProject = () => {
 
     const navigate = useNavigate();
 
     // The generic typing: what we get, error object, what we send
 
     const mutation = useMutation({
-        mutationFn: (login: ILogin) => {
-        return axiosInstance.post("/token/", login)
-                    .then(res => res.data)
+        mutationFn: (project: IProject) => {
+            console.log(project)
+        return axiosInstance.post("/projects/", project, {headers: {
+                Authorization: `Bearer ${localStorage.getItem("loginToken")}`,
+                "Content-Type": "multipart/form-data"}})
+                .then(res => res.data)
        },
 
        /*
@@ -27,12 +30,12 @@ const useLogin = () => {
         
         // When successfuly logged in save the received token to local storage and redirect to dashboard
 
-            navigate("/");
-
+        // localStorage.setItem("loginToken", token);
+        navigate("/");
        }
     });
 
     return mutation;
 }
 
-export default useLogin;
+export default useCreateProject;

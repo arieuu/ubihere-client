@@ -19,8 +19,6 @@ function HomePage() {
                     <img src={logo} alt="" className="w-[44px] h-[46px]"/>
                 </div>
 
-                {localStorage.getItem("loginToken")}
-                
                 <NavigationLinks />
                 <div className="grid px-5 gap-6 grid-cols-1
                                 sm:grid-cols-2
