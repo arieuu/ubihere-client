@@ -38,5 +38,7 @@ export interface IUser {
 }
 
 export interface IError extends Error {
-    response?: { status: number }
+    response?: { status: number
+                data: {email: string}
+     }
 }

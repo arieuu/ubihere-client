@@ -19,7 +19,7 @@ type SchemaShape = z.infer<typeof schema>;
 function SignupPage() {
 
     const { register, handleSubmit, formState: { errors }} = useForm<SchemaShape>({ resolver: zodResolver(schema)});
-    const { mutate } = useSignUp();
+    const { mutate, isError: isSignupError, isLoading: isSignupLoading, error } = useSignUp();
 
     const onSubmit: SubmitHandler<SchemaShape> = (data) => {
 
@@ -63,10 +63,14 @@ function SignupPage() {
 
                 <button type="submit" className="mx-auto hover:bg-[#CFB619] flex justify-between bg-YellowUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" >  
                     Criar conta 
-                    <img className="w-6" src={arrow} alt="" />
+                    { !isSignupLoading ? 
+                    <img className="w-6" src={arrow} alt="" /> :
+                    <span className="loading loading-ball loading-lg"></span>
+                    }
                 </button> 
             </form>
 
+            { isSignupError && <ErrorAlert message={error.message}/>}
 
             <div className="mt-9 text-[17px] flex justify-center text-DarkgrayUbihere-0 px-6 text-center"> 
                 Ubiwhere 2007-2024. All rights reserved. 

@@ -1,12 +1,7 @@
 import { useMutation } from "react-query"
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../services/axiosInstance";
-import { ISignUp } from "../types/main";
-
-interface Ilogin {
-    username: string,
-    password: string,
-}
+import { IError, ISignUp } from "../types/main";
 
 const useSignUp = () => {
 
@@ -20,20 +15,21 @@ const useSignUp = () => {
                     .then(res => res.data)
        },
 
-       /*
        onError: (error: IError) => {
-        if (error.response?.status == 400) error.message = "Please fill in the data properly";
-        if (error.response?.status == 401) error.message = "Username/password incorrect!";
-        console.log(error)
+            if(error.response?.data.email) {
+                error.message = "This email is already taken"
+            }
+            else {
+                error.message = "Something went wrong"
+            }
+            
        },
-       */
        
-       onSuccess: (token) => {
+       onSuccess: () => {
         
-        // When successfuly logged in save the received token to local storage and redirect to dashboard
+            // When successfuly logged in save the received token to local storage and redirect to dashboard
 
-        // localStorage.setItem("loginToken", token);
-        navigate("/login");
+            navigate("/login");
        }
     });
 
