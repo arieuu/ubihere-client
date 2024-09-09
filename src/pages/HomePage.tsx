@@ -8,8 +8,8 @@ function HomePage() {
 
     const { isLoading, data: projects, isError } = useGetProjects()
     
-    console.log(projects)
     console.log("token:" + localStorage.getItem("loginToken"))
+
     return(
         <>
             <div className="flex flex-col justify-center align-middle pt-28 pb-8 border-black border- border-solid ">

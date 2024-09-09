@@ -11,6 +11,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateComment from "../hooks/useCreateComment";
 import useRetrieveUser from "../hooks/useRetrieveUser";
+import { useState } from "react";
+import { IComment, IUser } from "../types/main";
 
 const schema = z.object({
     comment: z.string().min(1, {message: "Comment can't be empty"}),
@@ -26,16 +28,16 @@ function ProjectPage() {
     const { data: comments } = useGetComments();
 
     const { register, handleSubmit, formState: { errors }} = useForm<SchemaShape>({ resolver: zodResolver(schema)});
-    const { mutate } = useCreateComment();
+    const { mutate, isError: isCommentError } = useCreateComment();
 
     // Getting data from the user that's currently logged in
 
     const token = localStorage.getItem("loginToken")!.split('.');
-    console.log("tokeeeen" + token)
     const tokenPayload = JSON.parse(atob(token[1]));
     const userId = tokenPayload.user_id
     const { data: userInformation } = useRetrieveUser(userId)
 
+    const [madeComments, setMadeComments] = useState<IComment[]>([])
 
     const onSubmit: SubmitHandler<SchemaShape> = (data) => {
 
@@ -47,19 +49,33 @@ function ProjectPage() {
 
         const comment = data.comment;
 
+        madeComments.unshift({
+            commenter_name: userInformation!.name,
+            comment_owner_email: userInformation!.email,
+            content: comment,
+            project_id: projectId!
+        });
+
+        setMadeComments(madeComments);
+
         console.log("Collected data: " + comment)
 
-        // mutate({email, password});
         mutate({
             commenter_name: userInformation!.name,
             comment_owner_email: userInformation!.email,
             content: comment,
             project_id: projectId!
-        })
+        });
+
+    console.log(isCommentError)
+        if(isCommentError) {
+            madeComments.shift()
+            setMadeComments(madeComments)
+        }
 
     }
 
-
+    
     return(
         <div className="max-w-[650px] mx-auto">
             <div className="flex flex-col justify-center align-middle pt-12 pb-8 mx-6">
@@ -94,6 +110,14 @@ function ProjectPage() {
                     <input {...register("comment")} className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
                     { (errors.comment) && <ErrorAlert message={errors.comment?.message}/> }
                 </form>
+
+                { isCommentError && "Algo deu errado"}
+
+                { madeComments?.map((comment) => {
+                    if (comment.project_id == (project?.id)?.toString()) {
+                        return <ProjectComment comment={comment}/>
+                    }
+                })}
 
                 { comments?.map((comment) => {
                     if (comment.project_id == (project?.id)?.toString()) {
