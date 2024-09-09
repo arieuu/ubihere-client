@@ -30,7 +30,7 @@ function LoginPage() {
         const email = data.email;
         const password = data.password;
 
-        console.log("Collected data: " + email + password + name)
+        // console.log("Collected data: " + email + password + name)
 
         mutate({email, password});
 

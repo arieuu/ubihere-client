@@ -11,11 +11,11 @@ export interface IProject {
 }
 
 export interface IComment {
-    id: number,
+    id?: number,
     commenter_name: string,
     comment_owner_email: string,
     content: string,
-    project_id: number,
+    project_id: string,
 }
 
 export interface ISignUp {

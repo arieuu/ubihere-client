@@ -5,12 +5,60 @@ import StarRating from "../components/StarRating";
 import { useParams } from "react-router-dom";
 import useRetrieveProject from "../hooks/useRetrieveProject";
 import useGetComments from "../hooks/useGetComments";
+import { z } from "zod";
+import ErrorAlert from "../components/ErrorAlert";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useCreateComment from "../hooks/useCreateComment";
+import useRetrieveUser from "../hooks/useRetrieveUser";
+
+const schema = z.object({
+    comment: z.string().min(1, {message: "Comment can't be empty"}),
+});
+
+type SchemaShape = z.infer<typeof schema>;
+
 
 function ProjectPage() {
 
     const { projectId } = useParams();
     const { data: project  } = useRetrieveProject(projectId ? projectId : "none");
     const { data: comments } = useGetComments();
+
+    const { register, handleSubmit, formState: { errors }} = useForm<SchemaShape>({ resolver: zodResolver(schema)});
+    const { mutate } = useCreateComment();
+
+    // Getting data from the user that's currently logged in
+
+    const token = localStorage.getItem("loginToken")!.split('.');
+    console.log("tokeeeen" + token)
+    const tokenPayload = JSON.parse(atob(token[1]));
+    const userId = tokenPayload.user_id
+    const { data: userInformation } = useRetrieveUser(userId)
+
+
+    const onSubmit: SubmitHandler<SchemaShape> = (data) => {
+
+        /* 
+           We don't even need to prevent form default behaviour.
+           We Also don't need to check if the data has been received because
+           the form won't submit until everything has been validated
+        */
+
+        const comment = data.comment;
+
+        console.log("Collected data: " + comment)
+
+        // mutate({email, password});
+        mutate({
+            commenter_name: userInformation!.name,
+            comment_owner_email: userInformation!.email,
+            content: comment,
+            project_id: projectId!
+        })
+
+    }
+
 
     return(
         <div className="max-w-[650px] mx-auto">
@@ -42,10 +90,13 @@ function ProjectPage() {
                     {project?.about}
                 </p>
 
-                <input className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input {...register("comment")} className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
+                    { (errors.comment) && <ErrorAlert message={errors.comment?.message}/> }
+                </form>
 
                 { comments?.map((comment) => {
-                    if (comment.project_id == project?.id) {
+                    if (comment.project_id == (project?.id)?.toString()) {
                         return <ProjectComment comment={comment}/>
                     }
                 })}
