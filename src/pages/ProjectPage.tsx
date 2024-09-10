@@ -28,7 +28,7 @@ function ProjectPage() {
     const { data: comments } = useGetComments();
 
     const { register, handleSubmit, formState: { errors }, setValue: setCommentInputValue } = useForm<SchemaShape>({ resolver: zodResolver(schema)});
-    const { mutate, isError: isCommentError } = useCreateComment();
+    const { mutate, isError: isCommentError, error: createCommentError } = useCreateComment();
 
     // Getting comment input value so we can manipulate it
 
@@ -58,12 +58,14 @@ function ProjectPage() {
         
         const comment = data.comment;
 
+        if(!isCommentError) {
         madeComments.unshift({
             commenter_name: userInformation!.name,
             comment_owner_email: userInformation!.email,
             content: comment,
             project_id: projectId!
         });
+    }
 
         setMadeComments(madeComments);
 
@@ -76,6 +78,7 @@ function ProjectPage() {
             project_id: projectId!
         });
 
+        
         
         if(isCommentError) {
             madeComments.shift()
@@ -128,7 +131,7 @@ function ProjectPage() {
                     <h3 className="text-xl mx-auto mb-16 text-DarkgrayUbihere-0"> Login to comment </h3>
                 }
 
-                { isCommentError && "Something went wrong"}
+                { isCommentError && <ErrorAlert message={createCommentError?.message}/>}
 
                 { madeComments?.map((comment) => {
                     if (comment.project_id == (project?.id)?.toString()) {

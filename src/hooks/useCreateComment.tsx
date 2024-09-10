@@ -21,8 +21,14 @@ const useCreateComment = () => {
 
        
        onError: (error: IError) => {
-        if (error.response?.status == 400) error.message = "Please fill in the data properly";
-        if (error.response?.status == 401) error.message = "Please log in first";
+        
+        if (error.response?.status == 401) {
+            error.message = "Please log in first";
+
+        } else {
+            error.message = "Something went wrong"
+        }
+
         console.log(error)
        },
       
