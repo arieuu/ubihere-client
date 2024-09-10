@@ -27,8 +27,11 @@ function ProjectPage() {
     const { data: project  } = useRetrieveProject(projectId ? projectId : "none");
     const { data: comments } = useGetComments();
 
-    const { register, handleSubmit, formState: { errors }} = useForm<SchemaShape>({ resolver: zodResolver(schema)});
+    const { register, handleSubmit, formState: { errors }, setValue: setCommentInputValue } = useForm<SchemaShape>({ resolver: zodResolver(schema)});
     const { mutate, isError: isCommentError } = useCreateComment();
+
+    // Getting comment input value so we can manipulate it
+
 
     // Getting data from the user that's currently logged in
 
@@ -46,7 +49,6 @@ function ProjectPage() {
     const [madeComments, setMadeComments] = useState<IComment[]>([])
 
     const onSubmit: SubmitHandler<SchemaShape> = (data) => {
-
         /* 
            We don't even need to prevent form default behaviour.
            We Also don't need to check if the data has been received because
@@ -80,12 +82,11 @@ function ProjectPage() {
             setMadeComments(madeComments)
         }
 
-        // Clearing the input after everything
+        // Cleaning input after comment submission
 
-        
+        setCommentInputValue("comment", "")
     }
 
-    
     return(
         <div className="max-w-[650px] mx-auto">
             <div className="flex flex-col justify-center align-middle pt-12 pb-8 mx-6">
@@ -120,7 +121,7 @@ function ProjectPage() {
                     localStorage.getItem("loginToken") ?
 
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <input {...register("comment")}  className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
+                        <input {...register("comment")} className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário"/>
                         { (errors.comment) && <ErrorAlert message={errors.comment?.message}/> }
                     </form> : 
                     
