@@ -32,9 +32,15 @@ function ProjectPage() {
 
     // Getting data from the user that's currently logged in
 
-    const token = localStorage.getItem("loginToken")!.split('.');
-    const tokenPayload = JSON.parse(atob(token[1]));
-    const userId = tokenPayload.user_id
+    const token = localStorage.getItem("loginToken")?.split('.');
+    let tokenPayload
+    let userId 
+
+    if(token) {
+        tokenPayload = JSON.parse(atob(token[1]));
+        userId = tokenPayload.user_id
+    }
+
     const { data: userInformation } = useRetrieveUser(userId)
 
     const [madeComments, setMadeComments] = useState<IComment[]>([])
@@ -106,14 +112,20 @@ function ProjectPage() {
                 </p>
                 */}
 
-                <p className="text-xl mb-24">
+                <p className="text-xl mb-20">
                     {project?.about}
                 </p>
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register("comment")}  className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
-                    { (errors.comment) && <ErrorAlert message={errors.comment?.message}/> }
-                </form>
+                { 
+                    localStorage.getItem("loginToken") ?
+
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <input {...register("comment")}  className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
+                        { (errors.comment) && <ErrorAlert message={errors.comment?.message}/> }
+                    </form> : 
+                    
+                    <h3 className="text-xl mx-auto mb-16 text-DarkgrayUbihere-0"> Login to comment </h3>
+                }
 
                 { isCommentError && "Something went wrong"}
 

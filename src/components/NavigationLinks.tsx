@@ -6,6 +6,7 @@ function NavigationLinks() {
 
     const onClickLogout = () => {
         localStorage.removeItem("loginToken")
+        // localStorage.setItem("loginToken", "")
     }
 
     return(
