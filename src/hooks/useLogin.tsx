@@ -1,7 +1,7 @@
 import { useMutation } from "react-query"
 import { redirect, useNavigate } from "react-router-dom";
 import axiosInstance from "../services/axiosInstance";
-import { ILogin, ISignUp } from "../types/main";
+import { IError, ILogin, ISignUp } from "../types/main";
 
 const useLogin = () => {
 
@@ -15,13 +15,14 @@ const useLogin = () => {
                     .then(res => res.data)
        },
 
-       /*
        onError: (error: IError) => {
-        if (error.response?.status == 400) error.message = "Please fill in the data properly";
-        if (error.response?.status == 401) error.message = "Username/password incorrect!";
-        console.log(error)
+        if (error.response?.status == 401) {
+            error.message = "Email/password incorrect!";
+
+        } else {
+            error.message = "Something went wrong"
+        }
        },
-       */
        
        onSuccess: (token) => {
         

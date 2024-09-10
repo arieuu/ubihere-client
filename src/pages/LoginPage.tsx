@@ -17,7 +17,7 @@ type SchemaShape = z.infer<typeof schema>;
 function LoginPage() {
 
     const { register, handleSubmit, formState: { errors }} = useForm<SchemaShape>({ resolver: zodResolver(schema)});
-    const { mutate } = useLogin();
+    const { mutate, isError: isLoginError, error: loginError, isLoading: isLoginLoading } = useLogin();
 
     const onSubmit: SubmitHandler<SchemaShape> = (data) => {
 
@@ -57,9 +57,14 @@ function LoginPage() {
 
                 <button type="submit" className="mx-auto hover:bg-[#CFB619] flex justify-between bg-YellowUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" >  
                     Entrar
-                    <img className="w-6" src={arrow} alt="" />
+
+                    { 
+                        !isLoginLoading ? <img className="w-6" src={arrow} alt="" /> :
+                        <span className="loading loading-ball loading-lg"></span> 
+                    }
                 </button> 
             </form>
+            { isLoginError && <ErrorAlert message={loginError.message}/> }
 
 
             <div className="mt-9 text-[17px] flex justify-center text-DarkgrayUbihere-0 px-6 text-center"> 

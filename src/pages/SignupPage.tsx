@@ -64,8 +64,8 @@ function SignupPage() {
                 <button type="submit" className="mx-auto hover:bg-[#CFB619] flex justify-between bg-YellowUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" >  
                     Criar conta 
                     { !isSignupLoading ? 
-                    <img className="w-6" src={arrow} alt="" /> :
-                    <span className="loading loading-ball loading-lg"></span>
+                        <img className="w-6" src={arrow} alt="" /> :
+                        <span className="loading loading-ball loading-lg"></span>
                     }
                 </button> 
             </form>

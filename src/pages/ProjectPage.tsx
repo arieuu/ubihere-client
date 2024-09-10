@@ -11,7 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateComment from "../hooks/useCreateComment";
 import useRetrieveUser from "../hooks/useRetrieveUser";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { IComment, IUser } from "../types/main";
 
 const schema = z.object({
@@ -47,6 +47,7 @@ function ProjectPage() {
            the form won't submit until everything has been validated
         */
 
+        
         const comment = data.comment;
 
         madeComments.unshift({
@@ -67,12 +68,15 @@ function ProjectPage() {
             project_id: projectId!
         });
 
-    console.log(isCommentError)
+        
         if(isCommentError) {
             madeComments.shift()
             setMadeComments(madeComments)
         }
 
+        // Clearing the input after everything
+
+        
     }
 
     
@@ -107,11 +111,11 @@ function ProjectPage() {
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register("comment")} className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
+                    <input {...register("comment")}  className="mx-auto bg bg-[url('/arrowdown.svg')] bg-no-repeat bg-left pl-[60px]  bg-LightgrayUbihere-0 w-full max-w-[650px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-12" type="text" placeholder="Escreva o seu comentário" />
                     { (errors.comment) && <ErrorAlert message={errors.comment?.message}/> }
                 </form>
 
-                { isCommentError && "Algo deu errado"}
+                { isCommentError && "Something went wrong"}
 
                 { madeComments?.map((comment) => {
                     if (comment.project_id == (project?.id)?.toString()) {
