@@ -33,7 +33,7 @@ type SchemaShape = z.infer<typeof schema>;
 function CreateProjectPage() {
 
     const { register, handleSubmit, formState: { errors }} = useForm<SchemaShape>({ resolver: zodResolver(schema)});
-    const { mutate } = useCreateProject();
+    const { mutate, isLoading: isCreateProjectLoading, isError: isCreateProjectError, error: errorCreateProject } = useCreateProject();
 
     const token = localStorage.getItem("loginToken")!.split('.');
     const tokenPayload = JSON.parse(atob(token[1]));
@@ -98,9 +98,17 @@ function CreateProjectPage() {
 
                     <button type="submit" className="mx-auto hover:bg-[#CFB619] flex justify-between bg-YellowUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" >  
                         Criar projeto
-                        <img className="w-6" src={arrow} alt="" />
+                        { !isCreateProjectLoading ?
+                            <img className="w-6" src={arrow} alt="" /> :
+                            <span className="loading loading-ball loading-lg"></span> 
+                        }
+
                     </button> 
                 </form>
+
+
+                { isCreateProjectError && <ErrorAlert message={errorCreateProject.message}/> }
+
 
 
                 <div className="mt-9 text-[17px] flex justify-center text-DarkgrayUbihere-0 px-6 text-center"> 
