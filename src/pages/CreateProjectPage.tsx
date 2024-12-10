@@ -7,6 +7,7 @@ import useRetrieveUser from "../hooks/useRetrieveUser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateProject from "../hooks/useCreateProject";
 import ErrorAlert from "../components/ErrorAlert";
+import { Link } from "react-router-dom";
 
 const MAX_FILE_SIZE = 5000000; // Figure the bug with this 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/svg", "svg"];
@@ -70,8 +71,10 @@ function CreateProjectPage() {
         <div className="max-w-[500px] mx-auto">
             <div className="flex flex-col justify-center align-middle pt-16 pb-8 mx-6">
                 <div className="mx-aut mb-2 flex gap-2">
-                    <h1 className="text-5xl font-Odor
+                    <Link to={"/"} >
+                        <h1 className="text-5xl font-Odor
                                     sm:text-6xl"> UBIHERE </h1>
+                    </Link>
                     <img src={logo} alt="" className="w-[44px] h-[46px]"/>
                 </div>
 
