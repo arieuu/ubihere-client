@@ -34,7 +34,7 @@ function ProjectCard({ project }:Props) {
                 style={{backgroundImage: `url(${project.image})`}}  // Adding bg image from api
                 > 
                 
-                <Link to={`/projectpage/${project.id}`} className="text-4xl font-Odor text-white justify-self-center my-auto ml- pt-8 hover:underline"><h1 className=""> {project.title} </h1></Link>
+                <Link to={`/project/${project.id}`} className="text-4xl font-Odor text-white justify-self-center my-auto ml- pt-8 hover:underline"><h1 className=""> {project.title} </h1></Link>
 
                 <div className="flex justify-between font-Lexend text-white text-sm">
                     

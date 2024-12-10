@@ -2,7 +2,7 @@ import logo from "/ubiherelogo.svg";
 import ProjectComment from "../components/ProjectComment";
 import NavigationLinks from "../components/NavigationLinks";
 import StarRating from "../components/StarRating";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useRetrieveProject from "../hooks/useRetrieveProject";
 import useGetComments from "../hooks/useGetComments";
 import { z } from "zod";
@@ -94,8 +94,10 @@ function ProjectPage() {
         <div className="max-w-[650px] mx-auto">
             <div className="flex flex-col justify-center align-middle pt-12 pb-8 mx-6">
                 <div className="mx-aut mb-2 flex gap-2">
-                    <h1 className="text-5xl font-Odor
+                    <Link to={"/"}>
+                        <h1 className="text-5xl font-Odor
                                     sm:text-6xl"> UBIHERE </h1>
+                    </Link>
                     <img src={logo} alt="" className="w-[44px] h-[46px]"/>
                 </div>
 

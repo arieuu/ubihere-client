@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateProject from "../hooks/useCreateProject";
 import ErrorAlert from "../components/ErrorAlert";
 
-const MAX_FILE_SIZE = 500000;
+const MAX_FILE_SIZE = 5000000; // Figure the bug with this 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/svg", "svg"];
 
 const schema = z.object({

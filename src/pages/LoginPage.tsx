@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useLogin from "../hooks/useLogin";
 import ErrorAlert from "../components/ErrorAlert";
+import { Link } from "react-router-dom";
 
 const schema = z.object({
     email: z.string().email({message: "Not a valid email format"}),
@@ -40,8 +41,10 @@ function LoginPage() {
     return(
         <div className="flex flex-col justify-center align-middle pt-48 pb-8 mx-6">
             <div className="mx-auto mb-3 flex gap-2">
-                <h1 className="text-5xl font-Odor
+                <Link to={"/"} >
+                    <h1 className="text-5xl font-Odor
                                 sm:text-6xl"> UBIHERE </h1>
+                </Link>
                 <img src={logo} alt="" className="w-[44px] h-[46px]"/>
             </div>
 
