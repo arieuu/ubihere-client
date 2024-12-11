@@ -1,13 +1,17 @@
 import logo from "/ubiherelogo.svg";
 import arrow from "/arrow.svg";
 import NavigationLinks from "../components/NavigationLinks";
-import { z } from "zod";
+import { date, z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useRetrieveUser from "../hooks/useRetrieveUser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateProject from "../hooks/useCreateProject";
 import ErrorAlert from "../components/ErrorAlert";
 import { Link } from "react-router-dom";
+
+import ReactCrop, { Crop } from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import { useState } from "react";
 
 const MAX_FILE_SIZE = 5000000; // Figure the bug with this 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/svg", "svg"];
@@ -67,6 +71,26 @@ function CreateProjectPage() {
     }
 
 
+    const [crop, setCrop] = useState<Crop>({
+        unit: "%",
+        x: 0,
+        y: 0,
+        // width: 851,
+        // height: 564
+        width: 100,
+        height: 50
+    })
+
+    const [image, setImage] = useState(null)
+
+    // Set image that was uploaded through input to be visible on page
+
+    const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setImage(URL.createObjectURL(event.target.files[0]));
+        }
+    }
+
     return(
         <div className="max-w-[500px] mx-auto">
             <div className="flex flex-col justify-center align-middle pt-16 pb-8 mx-6">
@@ -95,9 +119,15 @@ function CreateProjectPage() {
                     { (errors.content) && <ErrorAlert message={errors.content?.message}/> }
 
 
-                    <input {...register("projectImage")} className="mx-auto bg-LightgrayUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" type="file" placeholder="Imagem do projeto" />
+                    <input {...register("projectImage")} onChange={onImageChange}  className="filetype mx-auto bg-LightgrayUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" type="file" placeholder="Imagem do projeto" />
                     { (errors.projectImage) && <ErrorAlert message={errors.projectImage?.message?.toString()}/> }
 
+                    { image && // Only show image cropper if there is an image
+
+                        <ReactCrop crop={crop} onChange={c => setCrop(c)} aspect={16/9}>
+                            <img src={image} alt="" /> 
+                        </ReactCrop> 
+                    }
 
                     <button type="submit" className="mx-auto hover:bg-[#CFB619] flex justify-between bg-YellowUbihere-0 w-full max-w-[450px] mx- p-5 placeholder:text-DarkgrayUbihere-0 rounded-[28px] mb-3" >  
                         Criar projeto
